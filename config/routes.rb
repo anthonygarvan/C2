@@ -32,6 +32,8 @@ C2::Application.routes.draw do
       get 'approve'   # this route has special protection to prevent the confused deputy problem
                       # if you are adding a new controller which performs an action, use post instead
       post 'approve'
+      get 'cancel_form'
+      post 'cancel'
     end
 
     collection do
@@ -41,6 +43,7 @@ C2::Application.routes.draw do
 
     resources :comments, only: :create
     resources :attachments, only: [:create, :destroy, :show]
+
   end
 
   namespace :ncr do
@@ -50,7 +53,7 @@ C2::Application.routes.draw do
 
   namespace :gsa18f do
     resources :procurements, except: [:index, :destroy]
-    get '/dashboard' => 'dashboard#index' 
+    get '/dashboard' => 'dashboard#index'
   end
 
   mount Peek::Railtie => '/peek'
